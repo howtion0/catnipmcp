@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "catnip-local": {
+      "command": "/absolute/path/to/Catnip.app/Contents/Resources/WorkBuddyBridge/Catnip.WorkBuddyBridge",
+      "args": []
+    }
+  }
+}

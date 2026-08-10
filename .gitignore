@@ -1,0 +1,32 @@
+.DS_Store
+**/.DS_Store
+
+# .NET build output
+bin/
+obj/
+artifacts/
+TestResults/
+.vs/
+*.user
+*.suo
+
+# Local IDE state
+.idea/
+.vscode/*.log
+.workbuddy/mcp.json
+
+# Runtime-local data and secrets
+.env
+.env.*
+*.pfx
+*.snk
+*.log
+*.db
+*.db-shm
+*.db-wal
+settings.local.json
+**/vault.dat
+**/secrets/
+**/data/*.db*
+**/logs/
+**/state/

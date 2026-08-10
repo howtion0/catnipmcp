@@ -1,0 +1,538 @@
+<Window
+    x:Class="Catnip.Desktop.Mac.Views.MainWindow"
+    x:Name="Root"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+    xmlns:vm="using:Catnip.Desktop.Mac.ViewModels"
+    x:DataType="vm:MainWindowViewModel"
+    Title="Catnip"
+    Width="1180"
+    Height="760"
+    MinWidth="980"
+    MinHeight="640"
+    Background="#F4F6FA"
+    FontFamily="Inter, PingFang SC, Microsoft YaHei">
+  <Window.Styles>
+    <Style Selector="Border.card">
+      <Setter Property="Background" Value="#FFFFFF" />
+      <Setter Property="BorderBrush" Value="#E7EAF0" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="12" />
+      <Setter Property="Padding" Value="24" />
+    </Style>
+    <Style Selector="Button.nav">
+      <Setter Property="Width" Value="244" />
+      <Setter Property="Height" Value="54" />
+      <Setter Property="Margin" Value="12,3" />
+      <Setter Property="Padding" Value="18,0" />
+      <Setter Property="HorizontalContentAlignment" Value="Left" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="#252A34" />
+      <Setter Property="CornerRadius" Value="10" />
+    </Style>
+    <Style Selector="Button.nav:pointerover">
+      <Setter Property="Background" Value="#F0F5FC" />
+    </Style>
+    <Style Selector="Button.nav:pressed">
+      <Setter Property="Background" Value="#C9DFFF" />
+    </Style>
+    <Style Selector="Button.nav.active">
+      <Setter Property="Background" Value="#DCEAFF" />
+      <Setter Property="Foreground" Value="#0878F9" />
+    </Style>
+    <Style Selector="Button.nav.active:pointerover">
+      <Setter Property="Background" Value="#D3E5FF" />
+    </Style>
+    <Style Selector="Button.primary">
+      <Setter Property="Background" Value="#0878F9" />
+      <Setter Property="Foreground" Value="White" />
+      <Setter Property="CornerRadius" Value="9" />
+      <Setter Property="Height" Value="48" />
+      <Setter Property="Padding" Value="28,0" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Button.secondary">
+      <Setter Property="Background" Value="#FFFFFF" />
+      <Setter Property="Foreground" Value="#252A34" />
+      <Setter Property="BorderBrush" Value="#D7DCE5" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="9" />
+      <Setter Property="Height" Value="48" />
+      <Setter Property="Padding" Value="28,0" />
+    </Style>
+    <Style Selector="Button.segment">
+      <Setter Property="Background" Value="#EEF1F6" />
+      <Setter Property="Foreground" Value="#687184" />
+      <Setter Property="CornerRadius" Value="8" />
+      <Setter Property="Padding" Value="18,9" />
+    </Style>
+    <Style Selector="Button.segment.active">
+      <Setter Property="Background" Value="#0878F9" />
+      <Setter Property="Foreground" Value="White" />
+    </Style>
+    <Style Selector="ToggleSwitch.clashSwitch">
+      <Setter Property="MinWidth" Value="52" />
+      <Setter Property="HorizontalAlignment" Value="Right" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TextBlock.muted">
+      <Setter Property="Foreground" Value="#7E8798" />
+    </Style>
+    <Style Selector="TextBlock.sectionTitle">
+      <Setter Property="FontSize" Value="18" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="#202632" />
+    </Style>
+    <Style Selector="TextBox.compact">
+      <Setter Property="Height" Value="38" />
+      <Setter Property="CornerRadius" Value="7" />
+    </Style>
+  </Window.Styles>
+
+  <Grid ColumnDefinitions="268,*">
+    <Border Grid.Column="0" Background="#FFFFFF" BorderBrush="#E5E8EE" BorderThickness="0,0,1,0">
+      <Grid RowDefinitions="Auto,*,Auto,Auto" Margin="0,20,0,16">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="12" Margin="24,8,18,22" VerticalAlignment="Center">
+          <Border Width="46" Height="46" CornerRadius="12" Background="#121722">
+            <materialIcons:MaterialIcon Kind="Cat" Width="28" Height="28" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Border>
+          <StackPanel VerticalAlignment="Center">
+            <TextBlock Text="Catnip" FontSize="20" FontWeight="Bold" Foreground="#181D27" />
+            <TextBlock Text="SERVER CONTROL" FontSize="10" FontWeight="SemiBold" Foreground="#0878F9" LetterSpacing="1.1" />
+          </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+          <Button Classes="nav" Classes.active="{Binding IsHomePage}" Command="{Binding NavigateCommand}" CommandParameter="home">
+            <StackPanel Orientation="Horizontal" Spacing="14">
+              <materialIcons:MaterialIcon Kind="HomeOutline" Width="24" Height="24" />
+              <TextBlock Text="首页" FontSize="15" VerticalAlignment="Center" />
+            </StackPanel>
+          </Button>
+          <Button Classes="nav" Classes.active="{Binding IsLogsPage}" Command="{Binding NavigateCommand}" CommandParameter="logs">
+            <StackPanel Orientation="Horizontal" Spacing="14">
+              <materialIcons:MaterialIcon Kind="TextBoxOutline" Width="24" Height="24" />
+              <TextBlock Text="日志" FontSize="15" VerticalAlignment="Center" />
+            </StackPanel>
+          </Button>
+          <Button Classes="nav" Classes.active="{Binding IsKeysPage}" Command="{Binding NavigateCommand}" CommandParameter="keys">
+            <StackPanel Orientation="Horizontal" Spacing="14">
+              <materialIcons:MaterialIcon Kind="KeyOutline" Width="24" Height="24" />
+              <TextBlock Text="API 密钥配置" FontSize="15" VerticalAlignment="Center" />
+            </StackPanel>
+          </Button>
+          <Button Classes="nav" Classes.active="{Binding IsConnectionsPage}" Command="{Binding NavigateCommand}" CommandParameter="connections">
+            <StackPanel Orientation="Horizontal" Spacing="14">
+              <materialIcons:MaterialIcon Kind="Web" Width="24" Height="24" />
+              <TextBlock Text="API 连接情况" FontSize="15" VerticalAlignment="Center" />
+            </StackPanel>
+          </Button>
+          <Button Classes="nav" Classes.active="{Binding IsFiltersPage}" Command="{Binding NavigateCommand}" CommandParameter="filters">
+            <StackPanel Orientation="Horizontal" Spacing="14">
+              <materialIcons:MaterialIcon Kind="FilterOutline" Width="24" Height="24" />
+              <TextBlock Text="过滤规则设置" FontSize="15" VerticalAlignment="Center" />
+            </StackPanel>
+          </Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="24,0,24,18" Spacing="11">
+          <Border Height="1" Background="#E5E8EE" Margin="0,0,0,7" />
+          <Grid ColumnDefinitions="24,*,Auto,32">
+            <materialIcons:MaterialIcon Kind="ArrowUp" Width="18" Height="18" Foreground="#98A0AF" />
+            <TextBlock Grid.Column="1" Text="上传" Foreground="#596273" />
+            <TextBlock Grid.Column="2" Text="0.00" Foreground="#FF6433" FontWeight="SemiBold" />
+            <TextBlock Grid.Column="3" Text="B/s" Foreground="#596273" HorizontalAlignment="Right" />
+          </Grid>
+          <Grid ColumnDefinitions="24,*,Auto,32">
+            <materialIcons:MaterialIcon Kind="ArrowDown" Width="18" Height="18" Foreground="#98A0AF" />
+            <TextBlock Grid.Column="1" Text="下载" Foreground="#596273" />
+            <TextBlock Grid.Column="2" Text="0.00" Foreground="#0878F9" FontWeight="SemiBold" />
+            <TextBlock Grid.Column="3" Text="B/s" Foreground="#596273" HorizontalAlignment="Right" />
+          </Grid>
+          <Grid ColumnDefinitions="24,*,Auto">
+            <materialIcons:MaterialIcon Kind="Memory" Width="18" Height="18" Foreground="#98A0AF" />
+            <TextBlock Grid.Column="1" Text="内存使用" Foreground="#596273" />
+            <TextBlock Grid.Column="2" Text="{Binding MemoryText}" Foreground="#252A34" FontWeight="SemiBold" />
+          </Grid>
+        </StackPanel>
+
+        <Grid Grid.Row="3" ColumnDefinitions="18,*,Auto" Margin="24,0">
+          <Ellipse Width="9" Height="9" Fill="#26C875" IsVisible="{Binding IsRunning}" HorizontalAlignment="Left" />
+          <Ellipse Width="9" Height="9" Fill="#AAB1BF" IsVisible="{Binding IsStopped}" HorizontalAlignment="Left" />
+          <Ellipse Width="9" Height="9" Fill="#F2A93B" IsVisible="{Binding IsWorking}" HorizontalAlignment="Left" />
+          <TextBlock Grid.Column="1" Text="{Binding StatusText}" Foreground="#687184" />
+          <TextBlock Grid.Column="2" Text="{Binding Snapshot.Version, StringFormat='v{0}'}" Foreground="#8E96A5" />
+        </Grid>
+      </Grid>
+    </Border>
+
+    <Grid Grid.Column="1" RowDefinitions="82,*">
+      <Border Grid.Row="0" Background="#FFFFFF" BorderBrush="#E5E8EE" BorderThickness="0,0,0,1">
+        <Grid ColumnDefinitions="*,Auto" Margin="34,0,28,0">
+          <StackPanel VerticalAlignment="Center" Spacing="3">
+            <TextBlock Text="{Binding PageTitle}" FontSize="27" FontWeight="Bold" Foreground="#1C222D" />
+            <TextBlock Text="{Binding StatusMessage}" Classes="muted" FontSize="12" MaxWidth="620" TextTrimming="CharacterEllipsis" />
+          </StackPanel>
+          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+            <Button Width="42" Height="42" Background="Transparent" ToolTip.Tip="帮助">
+              <materialIcons:MaterialIcon Kind="HelpCircleOutline" Width="22" Height="22" Foreground="#4A5363" />
+            </Button>
+            <Button Width="42" Height="42" Background="Transparent" ToolTip.Tip="过滤规则设置" Command="{Binding NavigateCommand}" CommandParameter="filters">
+              <materialIcons:MaterialIcon Kind="CogOutline" Width="22" Height="22" Foreground="#4A5363" />
+            </Button>
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <ScrollViewer Grid.Row="1" Margin="28,22,28,24" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+          <StackPanel IsVisible="{Binding IsHomePage}" Spacing="18">
+            <Border Classes="card">
+              <StackPanel Spacing="18">
+                <Grid ColumnDefinitions="52,*,Auto">
+                  <Border Width="44" Height="44" CornerRadius="9" Background="#EAF2FF">
+                    <materialIcons:MaterialIcon Kind="MonitorDashboard" Width="25" Height="25" Foreground="#0878F9" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                  </Border>
+                  <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock Text="服务控制" Classes="sectionTitle" />
+                    <TextBlock Text="管理 Runtime 与 MCP Server 的真实运行状态" Classes="muted" FontSize="12" />
+                  </StackPanel>
+                  <Border Grid.Column="2" CornerRadius="16" Background="#EFF4FA" Padding="13,7" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Spacing="7">
+                      <Ellipse Width="8" Height="8" Fill="#26C875" IsVisible="{Binding IsRunning}" />
+                      <Ellipse Width="8" Height="8" Fill="#98A0AF" IsVisible="{Binding IsStopped}" />
+                      <Ellipse Width="8" Height="8" Fill="#F2A93B" IsVisible="{Binding IsWorking}" />
+                      <TextBlock Text="{Binding StatusText}" FontSize="12" Foreground="#556072" />
+                    </StackPanel>
+                  </Border>
+                </Grid>
+
+                <Grid ColumnDefinitions="*,Auto,Auto" Background="#F7F9FC" Margin="0,2,0,0">
+                  <StackPanel Margin="16,11">
+                    <TextBlock Text="MCP Server 地址" Classes="muted" FontSize="11" />
+                    <TextBlock Text="{Binding Snapshot.McpAddress}" FontFamily="Menlo, monospace" FontSize="13" Foreground="#1E293B" />
+                  </StackPanel>
+                  <Button Grid.Column="1" Margin="8" Classes="secondary" Height="38" Padding="15,0" Click="OnCopyAddressClicked">
+                    <TextBlock Text="复制地址" />
+                  </Button>
+                  <Button Grid.Column="2" Margin="0,8,8,8" Classes="secondary" Height="38" Padding="15,0" Command="{Binding TestApiCommand}">
+                    <StackPanel Orientation="Horizontal" Spacing="7">
+                      <materialIcons:MaterialIcon Kind="FlaskOutline" Width="18" Height="18" />
+                      <TextBlock Text="测试 API" />
+                    </StackPanel>
+                  </Button>
+                </Grid>
+
+                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" RowSpacing="16">
+                  <Button Grid.Column="0" Classes="primary" Margin="0,0,7,0" IsEnabled="{Binding CanStart}" Command="{Binding StartRuntimeCommand}">
+                    <StackPanel Orientation="Horizontal" Spacing="9">
+                      <materialIcons:MaterialIcon Kind="Play" Width="20" Height="20" />
+                      <TextBlock Text="启动服务" VerticalAlignment="Center" />
+                    </StackPanel>
+                  </Button>
+                  <Button Grid.Column="1" Classes="secondary" Margin="7,0,0,0" IsEnabled="{Binding CanStop}" Command="{Binding StopRuntimeCommand}">
+                    <StackPanel Orientation="Horizontal" Spacing="9">
+                      <materialIcons:MaterialIcon Kind="Stop" Width="20" Height="20" />
+                      <TextBlock Text="停止服务" VerticalAlignment="Center" />
+                    </StackPanel>
+                  </Button>
+                </Grid>
+
+                <Border CornerRadius="8" Background="#EDF5FF" BorderBrush="#CFE3FF" BorderThickness="1" Padding="14,11">
+                  <StackPanel Orientation="Horizontal" Spacing="10">
+                    <materialIcons:MaterialIcon Kind="InformationOutline" Width="20" Height="20" Foreground="#0878F9" />
+                    <TextBlock Text="Mac 桌面应用通过独立 TestApi 进程控制 Runtime；所有地址只监听本机回环。" Foreground="#31547E" VerticalAlignment="Center" />
+                  </StackPanel>
+                </Border>
+
+                <Grid ColumnDefinitions="Auto,*,Auto" Background="#F7F9FC">
+                  <StackPanel Orientation="Horizontal" Spacing="7" Margin="13,10">
+                    <Button Classes="segment" Classes.active="{Binding IsFullMode}" IsEnabled="{Binding CanControl}" Command="{Binding SetFullModeCommand}" Content="全量模式" />
+                    <Button Classes="segment" Classes.active="{Binding IsCustomMode}" IsEnabled="{Binding CanControl}" Command="{Binding SetCustomModeCommand}" Content="自定义模式" />
+                  </StackPanel>
+                  <StackPanel Grid.Column="1" Margin="22,0" VerticalAlignment="Center">
+                    <TextBlock Text="总开关" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding MasterText}" Classes="muted" FontSize="11" />
+                  </StackPanel>
+                  <ToggleSwitch
+                      Grid.Column="2"
+                      Margin="12"
+                      Classes="clashSwitch"
+                      IsChecked="{Binding Snapshot.MasterEnabled, Mode=OneWay}"
+                      IsEnabled="{Binding CanControl}"
+                      Command="{Binding ToggleMasterCommand}"
+                      OnContent=""
+                      OffContent=""
+                      ToolTip.Tip="{Binding MasterToggleText}" />
+                </Grid>
+
+                <TextBlock Text="{Binding LastTestSummary}" Classes="muted" FontSize="12" TextWrapping="Wrap" />
+              </StackPanel>
+            </Border>
+
+            <Border Classes="card">
+              <StackPanel Spacing="12">
+                <Grid ColumnDefinitions="52,*">
+                  <Border Width="44" Height="44" CornerRadius="9" Background="#EAF2FF">
+                    <materialIcons:MaterialIcon Kind="ViewDashboardOutline" Width="25" Height="25" Foreground="#0878F9" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                  </Border>
+                  <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock Text="部分打开功能" Classes="sectionTitle" />
+                    <TextBlock Text="自定义模式下可单独控制模块运行" Classes="muted" FontSize="12" />
+                  </StackPanel>
+                </Grid>
+                <ItemsControl ItemsSource="{Binding Modules}">
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:ModuleItemViewModel">
+                      <Grid ColumnDefinitions="44,*,118,74,82" MinHeight="62">
+                        <Border Grid.ColumnSpan="5" BorderBrush="#E9ECF1" BorderThickness="0,1,0,0" />
+                        <Border Width="34" Height="34" CornerRadius="8" Background="#F1F5FA" VerticalAlignment="Center">
+                          <materialIcons:MaterialIcon Kind="PuzzleOutline" Width="20" Height="20" Foreground="#40506A" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                          <TextBlock Text="{Binding DisplayName}" FontWeight="SemiBold" Foreground="#252A34" />
+                          <TextBlock Text="{Binding Description}" Classes="muted" FontSize="11" />
+                        </StackPanel>
+                        <TextBlock Grid.Column="2" Text="{Binding ConnectorText}" Classes="muted" FontSize="11" VerticalAlignment="Center" />
+                        <Button Grid.Column="3" Classes="secondary" Height="34" Padding="11,0" IsEnabled="{Binding CanTest}" Command="{Binding TestCommand}" Content="测试" VerticalAlignment="Center" />
+                        <ToggleSwitch
+                            Grid.Column="4"
+                            Classes="clashSwitch"
+                            IsChecked="{Binding Enabled, Mode=OneWay}"
+                            IsEnabled="{Binding CanToggle}"
+                            Command="{Binding ToggleCommand}"
+                            OnContent=""
+                            OffContent=""
+                            ToolTip.Tip="{Binding EnabledText}" />
+                      </Grid>
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+              </StackPanel>
+            </Border>
+
+            <Border Classes="card">
+              <StackPanel Spacing="14">
+                <Grid ColumnDefinitions="52,*,Auto">
+                  <Border Width="44" Height="44" CornerRadius="9" Background="#EAF2FF">
+                    <materialIcons:MaterialIcon Kind="CodeJson" Width="25" Height="25" Foreground="#0878F9" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                  </Border>
+                  <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock Text="WorkBuddy MCP 配置" Classes="sectionTitle" />
+                    <TextBlock Text="按当前应用位置动态生成，可编辑、复制或保存为 mcp.json" Classes="muted" FontSize="12" />
+                  </StackPanel>
+                  <Button Grid.Column="2" Classes="secondary" Command="{Binding RefreshWorkBuddyConfigCommand}" Content="重新生成" VerticalAlignment="Center" />
+                </Grid>
+                <StackPanel Spacing="6">
+                  <TextBlock Text="Server 名称" Classes="muted" FontSize="11" />
+                  <TextBox Classes="compact" Text="{Binding WorkBuddyServerName}" />
+                </StackPanel>
+                <TextBox
+                    Text="{Binding WorkBuddyConfigJson}"
+                    AcceptsReturn="True"
+                    MinHeight="170"
+                    FontFamily="Menlo, monospace"
+                    FontSize="12"
+                    TextWrapping="NoWrap"
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                  <Button Width="180" Classes="primary" Click="OnCopyWorkBuddyConfigClicked" Content="复制 JSON" />
+                  <Button Width="180" Classes="secondary" Click="OnSaveWorkBuddyConfigClicked" Content="保存为 mcp.json" />
+                </StackPanel>
+                <TextBlock Text="{Binding WorkBuddyConfigStatus}" Classes="muted" TextWrapping="Wrap" />
+              </StackPanel>
+            </Border>
+          </StackPanel>
+
+          <Border Classes="card" IsVisible="{Binding IsLogsPage}">
+            <Grid RowDefinitions="Auto,Auto,*">
+              <Grid Grid.Row="0" ColumnDefinitions="52,*,Auto">
+                <Border Width="44" Height="44" CornerRadius="9" Background="#EAF2FF">
+                  <materialIcons:MaterialIcon Kind="TextBoxOutline" Width="25" Height="25" Foreground="#0878F9" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                  <TextBlock Text="Runtime 持续日志" Classes="sectionTitle" />
+                  <TextBlock Text="stdout / stderr 异步落盘，显示最近 300 行" Classes="muted" FontSize="12" />
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8">
+                  <Button Classes="secondary" Height="38" Padding="14,0" Command="{Binding ToggleLogsPauseCommand}" Content="{Binding LogsPauseText}" />
+                  <Button Classes="secondary" Height="38" Padding="14,0" Command="{Binding RefreshLogsCommand}">
+                    <materialIcons:MaterialIcon Kind="Refresh" Width="19" Height="19" />
+                  </Button>
+                </StackPanel>
+              </Grid>
+              <TextBox Grid.Row="1" Margin="0,18,0,12" Classes="compact" PlaceholderText="搜索日志内容" Text="{Binding LogSearch}" />
+              <ListBox Grid.Row="2" ItemsSource="{Binding VisibleLogs}" MinHeight="420" Background="#F8FAFC" BorderBrush="#E6EAF0" BorderThickness="1">
+                <ListBox.ItemTemplate>
+                  <DataTemplate x:DataType="vm:RuntimeLogLineViewModel">
+                    <Grid ColumnDefinitions="96,68,*" Margin="8,5">
+                      <TextBlock Text="{Binding Timestamp}" FontFamily="Menlo, monospace" FontSize="11" Foreground="#6E7788" />
+                      <TextBlock Grid.Column="1" Text="{Binding Stream}" FontFamily="Menlo, monospace" FontSize="11" Foreground="#0878F9" />
+                      <TextBlock Grid.Column="2" Text="{Binding Message}" FontFamily="Menlo, monospace" FontSize="11" TextWrapping="Wrap" Foreground="#283244" />
+                    </Grid>
+                  </DataTemplate>
+                </ListBox.ItemTemplate>
+              </ListBox>
+            </Grid>
+          </Border>
+
+          <StackPanel IsVisible="{Binding IsKeysPage}" Spacing="16">
+            <Border Classes="card">
+              <StackPanel Spacing="16">
+                <Grid ColumnDefinitions="52,*">
+                  <Border Width="44" Height="44" CornerRadius="9" Background="#EAF2FF">
+                    <materialIcons:MaterialIcon Kind="ShieldKeyOutline" Width="25" Height="25" Foreground="#0878F9" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                  </Border>
+                  <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock Text="和风天气 API" Classes="sectionTitle" />
+                    <TextBlock Text="本 Server 调用外部天气 API；WorkBuddy 作为 MCP 客户端无需配置入站 Key" Classes="muted" FontSize="12" />
+                  </StackPanel>
+                </Grid>
+                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="12">
+                  <StackPanel Spacing="6">
+                    <TextBlock Text="专属 API Host" Classes="muted" FontSize="11" />
+                    <TextBox Classes="compact" Text="{Binding WeatherApiHost}" PlaceholderText="xxxx.qweatherapi.com" />
+                  </StackPanel>
+                  <StackPanel Grid.Column="1" Spacing="6">
+                    <TextBlock Text="默认测试城市" Classes="muted" FontSize="11" />
+                    <TextBox Classes="compact" Text="{Binding WeatherDefaultCity}" PlaceholderText="北京" />
+                  </StackPanel>
+                  <StackPanel Grid.Row="1" Spacing="6">
+                    <TextBlock Text="项目名称" Classes="muted" FontSize="11" />
+                    <TextBox Classes="compact" Text="{Binding WeatherProjectName}" PlaceholderText="mcptest" />
+                  </StackPanel>
+                  <StackPanel Grid.Row="1" Grid.Column="1" Spacing="6">
+                    <TextBlock Text="项目 ID" Classes="muted" FontSize="11" />
+                    <TextBox Classes="compact" Text="{Binding WeatherProjectId}" PlaceholderText="控制台项目 ID" />
+                  </StackPanel>
+                  <StackPanel Grid.Row="2" Spacing="6">
+                    <TextBlock Text="凭据名称" Classes="muted" FontSize="11" />
+                    <TextBox Classes="compact" Text="{Binding WeatherCredentialName}" PlaceholderText="testAPI KEY" />
+                  </StackPanel>
+                  <StackPanel Grid.Row="2" Grid.Column="1" Spacing="6">
+                    <TextBlock Text="凭据 ID" Classes="muted" FontSize="11" />
+                    <TextBox Classes="compact" Text="{Binding WeatherCredentialId}" PlaceholderText="控制台凭据 ID" />
+                  </StackPanel>
+                  <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Spacing="6">
+                    <TextBlock Text="API KEY（留空则保留原值）" Classes="muted" FontSize="11" />
+                    <TextBox Classes="compact" Text="{Binding WeatherApiKey}" PasswordChar="●" PlaceholderText="输入后保存即清空" />
+                  </StackPanel>
+                </Grid>
+                <Border CornerRadius="8" Background="#F7F9FC" BorderBrush="#E4E8EF" BorderThickness="1" Padding="14,11">
+                  <StackPanel Spacing="5">
+                    <TextBlock Text="数据库密钥状态" Classes="muted" FontSize="11" />
+                    <TextBlock Text="{Binding WeatherMaskedApiKey}" FontFamily="Menlo, monospace" FontSize="14" />
+                    <TextBlock Text="{Binding WeatherCredentialStatus}" Classes="muted" TextWrapping="Wrap" />
+                  </StackPanel>
+                </Border>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                  <Button Classes="primary" Command="{Binding SaveWeatherCredentialCommand}" IsEnabled="{Binding CanSaveWeatherCredential}" Content="保存到数据库" />
+                  <Button Classes="secondary" Command="{Binding TestWeatherCommand}" Content="测试和风连接" />
+                </StackPanel>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+
+          <StackPanel IsVisible="{Binding IsConnectionsPage}" Spacing="16">
+            <Border Classes="card">
+              <StackPanel Spacing="16">
+                <TextBlock Text="本机进程连接" Classes="sectionTitle" />
+                <Grid ColumnDefinitions="*,*">
+                  <Border Margin="0,0,8,0" Padding="18" CornerRadius="10" Background="#F7F9FC" BorderBrush="#E4E8EF" BorderThickness="1">
+                    <StackPanel Spacing="10">
+                      <materialIcons:MaterialIcon Kind="Connection" Width="28" Height="28" Foreground="#0878F9" HorizontalAlignment="Left" />
+                      <TextBlock Text="独立 TestApi" FontWeight="SemiBold" FontSize="16" />
+                      <TextBlock Text="{Binding Snapshot.TestApiAddress}" FontFamily="Menlo, monospace" FontSize="11" Classes="muted" />
+                      <TextBlock Text="{Binding ApiConnectionText}" Foreground="#188B50" />
+                    </StackPanel>
+                  </Border>
+                  <Border Grid.Column="1" Margin="8,0,0,0" Padding="18" CornerRadius="10" Background="#F7F9FC" BorderBrush="#E4E8EF" BorderThickness="1">
+                    <StackPanel Spacing="10">
+                      <materialIcons:MaterialIcon Kind="ServerNetwork" Width="28" Height="28" Foreground="#0878F9" HorizontalAlignment="Left" />
+                      <TextBlock Text="Runtime / MCP" FontWeight="SemiBold" FontSize="16" />
+                      <TextBlock Text="{Binding Snapshot.RuntimeAddress}" FontFamily="Menlo, monospace" FontSize="11" Classes="muted" />
+                      <TextBlock Text="{Binding StatusText}" Foreground="#556072" />
+                    </StackPanel>
+                  </Border>
+                  <Border Grid.Row="1" Grid.ColumnSpan="2" Padding="18" CornerRadius="10" Background="#F7F9FC" BorderBrush="#E4E8EF" BorderThickness="1">
+                    <Grid ColumnDefinitions="52,*,Auto">
+                      <Border Width="40" Height="40" CornerRadius="8" Background="#EAF2FF">
+                        <materialIcons:MaterialIcon Kind="WeatherPartlyCloudy" Width="24" Height="24" Foreground="#0878F9" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                      </Border>
+                      <StackPanel Grid.Column="1" Spacing="5" VerticalAlignment="Center">
+                        <TextBlock Text="和风天气" FontWeight="SemiBold" FontSize="16" />
+                        <TextBlock Text="{Binding WeatherApiHost, FallbackValue=尚未配置专属 API Host}" FontFamily="Menlo, monospace" FontSize="11" Classes="muted" />
+                        <TextBlock Text="{Binding WeatherCredentialStatus}" Classes="muted" TextWrapping="Wrap" />
+                      </StackPanel>
+                      <Button Grid.Column="2" Classes="secondary" Command="{Binding TestWeatherCommand}" Content="测试连接" VerticalAlignment="Center" />
+                    </Grid>
+                  </Border>
+                </Grid>
+                <Button Classes="primary" HorizontalAlignment="Left" Command="{Binding TestApiCommand}" Content="执行本地 API 测试" />
+                <TextBlock Text="{Binding LastTestSummary}" Classes="muted" TextWrapping="Wrap" />
+              </StackPanel>
+            </Border>
+          </StackPanel>
+
+          <StackPanel IsVisible="{Binding IsFiltersPage}" Spacing="16">
+            <Border Classes="card">
+              <StackPanel Spacing="16">
+                <Grid ColumnDefinitions="52,*,Auto">
+                  <Border Width="44" Height="44" CornerRadius="9" Background="#EAF2FF">
+                    <materialIcons:MaterialIcon Kind="FilterOutline" Width="25" Height="25" Foreground="#0878F9" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                  </Border>
+                  <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock Text="过滤规则设置" Classes="sectionTitle" />
+                    <TextBlock Text="编辑待办与本地测试结果的会话级过滤条件" Classes="muted" FontSize="12" />
+                  </StackPanel>
+                  <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8">
+                    <Button Classes="secondary" Height="38" Padding="14,0" Command="{Binding AddFilterCommand}">
+                      <StackPanel Orientation="Horizontal" Spacing="6">
+                        <materialIcons:MaterialIcon Kind="Plus" Width="18" Height="18" />
+                        <TextBlock Text="新增规则" />
+                      </StackPanel>
+                    </Button>
+                    <Button Classes="primary" Height="38" Padding="14,0" Command="{Binding ValidateFiltersCommand}" Content="校验规则" />
+                  </StackPanel>
+                </Grid>
+
+                <ItemsControl ItemsSource="{Binding FilterRules}">
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:FilterRuleViewModel">
+                      <Border Margin="0,5" Padding="14" CornerRadius="9" Background="#F7F9FC" BorderBrush="#E4E8EF" BorderThickness="1">
+                        <Grid ColumnDefinitions="1.3*,1*,1*,1.1*,78,42">
+                          <TextBox Grid.Column="0" Classes="compact" Margin="0,0,7,0" PlaceholderText="规则名称" Text="{Binding Name}" />
+                          <TextBox Grid.Column="1" Classes="compact" Margin="0,0,7,0" PlaceholderText="字段" Text="{Binding Field}" />
+                          <TextBox Grid.Column="2" Classes="compact" Margin="0,0,7,0" PlaceholderText="比较方式" Text="{Binding Comparison}" />
+                          <TextBox Grid.Column="3" Classes="compact" Margin="0,0,7,0" PlaceholderText="值" Text="{Binding Value}" />
+                          <ToggleSwitch
+                              Grid.Column="4"
+                              Margin="10,0"
+                              Classes="clashSwitch"
+                              IsChecked="{Binding Enabled, Mode=OneWay}"
+                              Command="{Binding ToggleCommand}"
+                              OnContent=""
+                              OffContent=""
+                              ToolTip.Tip="{Binding EnabledText}" />
+                          <Button Grid.Column="5" Width="36" Height="36" Background="Transparent" Command="{Binding DeleteCommand}" ToolTip.Tip="删除规则">
+                            <materialIcons:MaterialIcon Kind="DeleteOutline" Width="19" Height="19" Foreground="#D34B54" />
+                          </Button>
+                        </Grid>
+                      </Border>
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <Border CornerRadius="8" Background="#EDF5FF" BorderBrush="#CFE3FF" BorderThickness="1" Padding="14,11">
+                  <TextBlock Text="{Binding FilterValidationMessage}" Foreground="#31547E" />
+                </Border>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </Grid>
+      </ScrollViewer>
+    </Grid>
+  </Grid>
+</Window>

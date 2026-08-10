@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <AssemblyName>Catnip-0.0.0-win-x64</AssemblyName>
+    <RootNamespace>Catnip.WindowsBootstrapper</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(PayloadZipPath)' != ''">
+    <EmbeddedResource Include="$(PayloadZipPath)" LogicalName="Catnip.Payload.zip" />
+  </ItemGroup>
+
+  <Target Name="RequirePayload" BeforeTargets="Publish" Condition="'$(PayloadZipPath)' == '' Or !Exists('$(PayloadZipPath)')">
+    <Error Text="PayloadZipPath must point to the generated Windows suite ZIP." />
+  </Target>
+</Project>

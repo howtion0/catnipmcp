@@ -1,0 +1,11 @@
+<Application
+    x:Class="Catnip.Desktop.Mac.App"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+    RequestedThemeVariant="Light">
+  <Application.Styles>
+    <FluentTheme DensityStyle="Normal" />
+    <materialIcons:MaterialIconStyles />
+  </Application.Styles>
+</Application>
